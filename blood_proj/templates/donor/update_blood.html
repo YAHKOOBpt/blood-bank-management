@@ -1,0 +1,56 @@
+ 
+{% extends 'donor/base.html' %}
+{% load static %}
+{% block content %}
+
+ <!-- Form Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    
+                    <div class="col-sm-12 col-xl">
+                        <div class="bg-secondary rounded h-100 p-4">
+                            <h6 class="mb-4">Update Blood</h6>
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="row mb-3">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">Blood Group</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-select mb-3" aria-label="Default select example" name="blood">
+                                            <option value="A+"{% if update.blood_grou == 'A+' %} selected{% endif %}>A+</option>
+                                            <option value="A-"{% if update.blood_grou == 'A-' %} selected{% endif %}>A-</option>
+                                            <option value="B+"{% if update.blood_grou == 'B+' %} selected{% endif %}>B+</option>
+                                            <option value="B-"{% if update.blood_grou == 'B-' %} selected{% endif %}>B-</option>
+                                            <option value="AB+"{% if update.blood_grou == 'AB+' %} selected{% endif %}>AB+</option>
+                                            <option value="AB-"{% if update.blood_grou == 'AB-' %} selected{% endif %}>AB-</option>
+                                            <option value="O+"{% if update.blood_grou == 'O+' %} selected{% endif %}>O+</option>
+                                            <option value="O-"{% if update.blood_grou == 'O-' %} selected{% endif %}>O-</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="inputPassword3" class="col-sm-2 col-form-label">Unit (ml)</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" class="form-control" id="inputPassword3" name="unit" value="{{update.unit}}">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="inputPassword3" class="col-sm-2 col-form-label">Disease (if any)</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputPassword3" name="disease" value="{{update.disease}}">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">age</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" class="form-control" id="inputEmail3" name="age" value={{update.age}}>
+                                    </div>
+                                </div>               
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </form>
+                        </div>
+                    </div>
+                                    
+                </div>
+            </div>
+            <!-- Form End -->
+{% endblock %}

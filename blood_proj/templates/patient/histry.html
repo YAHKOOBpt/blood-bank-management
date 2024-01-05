@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Donation Request History</title>
+</head>
+<body>
+
+<h2>Blood Donation Request History</h2>
+
+{% if blood_requests %}
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Request Date</th>
+                <th>Patient Name</th>
+                <th>Patient Age</th>
+                <th>Reason</th>
+                <th>Blood Type</th>
+                <th>Units Requested</th>
+                <th>Doctor</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in blood_requests %}
+                <tr>
+                    <td>{{ request.created_at|date:"F d, Y" }}</td>
+                    <td>{{ request.patient_name }}</td>
+                    <td>{{ request.patient_age }}</td>
+                    <td>{{ request.reason }}</td>
+                    <td>{{ request.get_blood_type_display }}</td>
+                    <td>{{ request.unit }}</td>
+                    <td>{{ request.doctor }}</td>
+                    <td>{% if request.status %}Approved{% else %}Pending{% endif %}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No blood donation requests found.</p>
+{% endif %}
+
+</body>
+</html>

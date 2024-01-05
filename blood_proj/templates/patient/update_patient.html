@@ -1,0 +1,79 @@
+ 
+{% extends 'patient/base.html' %}
+{% load static %}
+{% block content %}
+
+ <!-- Form Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    
+                    <div class="col-sm-12 col-xl">
+                        <div class="bg-secondary rounded h-100 p-4">
+                            <h6 class="mb-4">Update Patient</h6>
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="row mb-3">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">Name</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputEmail3" name="name" value="{{update.name}}">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="inputPassword3" class="col-sm-2 col-form-label">Age</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" class="form-control" id="inputPassword3" name="age" value="{{update.age}}">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="inputPassword3" class="col-sm-2 col-form-label">Email</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="inputPassword3" name="email" value="{{update.email}}">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">PhoneNo</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" class="form-control" id="inputEmail3" name="phone" value="{{update.mobile}}">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="inputPassword3" class="col-sm-2 col-form-label" >District</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputPassword3" name="district" value="{{update.district}}">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="inputPassword3" class="col-sm-2 col-form-label">Gender</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputPassword3" name="gender" value="{{update.gender}}">
+                                    </div>
+                                </div>
+                                <img src="{{update.imageURL}}" alt="" width="60px" height="80px" style="margin-left: 200px;margin-bottom: 10px;">
+                                <div class="row mb-3">
+                                    <label for="inputPassword3" class="col-sm-2 col-form-label">Photo</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control bg-dark" type="file" id="formFileMultiple" name="img" multiple>
+                                    </div>
+                                </div>
+                                 <div class="row mb-3">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">Address</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" placeholder="Address"
+                                        id="floatingTextarea" style="height: 150px;" name="address">{{update.address}}</textarea>
+                                    </div>
+                                </div>
+                               
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                </div>
+            </div>
+            <!-- Form End -->
+{% endblock %}

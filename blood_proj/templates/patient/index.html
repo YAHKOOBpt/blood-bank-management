@@ -1,0 +1,102 @@
+
+{% extends 'patient/base.html' %}
+{% load static %}
+{% block content %}
+
+
+            <!-- Sale & Revenue Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-th fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                
+                                <h6 class="mb-0"><a href="{% url 'add_patient' %}" style="color: azure;">Add Profile</a></h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-table fa-3x text-primary"></i>
+                            <div class="ms-3">
+   
+                                <h6 class="mb-0"><a href="{% url 'view_blood' %}" style="color: azure;">Blood</a></h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-laptop fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                
+                                <h6 class="mb-0"><a href="{% url 'request_history' %}" style="color: azure;">Request History</a></h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Sale & Revenue End -->
+            
+            <!-- Recent Sales Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0"> Blood Details</h6>
+                        <!-- <a href="">Show All</a> -->
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table text-start align-middle table-bordered table-hover mb-0">
+                            <thead>
+                                
+                                <tr class="text-white">
+                                    <!-- <th scope="col"><input class="form-check-input" type="checkbox"></th> -->
+                                    <th scope="col">Donor Name</th>
+                                    <th scope="col">Mobile</th>
+                                    <th scope="col">Address</th>
+                                    <th scope="col">Disease</th>
+                                    <th scope="col">Unit (ml)</th>              
+                                    <th scope="col">Gender</th>
+                                    <th scope="col">Age</th>
+                                    <th scope="col">Photo</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                                
+                            </thead>
+                            <tbody>
+                                {% for i in donors %}
+                                <tr>
+
+                                    <td>
+                                        {{i.name}}
+                                    </td>
+                                    <td>{{i.mobile}}</td>
+                                    <td>{{i.address}}</td>
+                                    <td>{{i.disease}}</td>
+                                    <td>{{i.unit}}</td>
+                                
+                                    <td>{{i.gender}}</td>
+                                    <td>{{i.age}}</td>
+                                    <td><img src="{{i.imageURL}}" alt="" width="80px" height="70px"></td>
+                                    <td><a class="btn btn-sm btn-primary" href="{% url 'make_request' i.pk %}">Send Request</a></td>
+                                </tr>
+                                {% endfor %}
+                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Recent Sales End -->
+
+
+
+
+            
+
+
+           
+
+{% endblock %}
+          

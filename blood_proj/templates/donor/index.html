@@ -1,0 +1,158 @@
+
+{% extends 'donor/base.html' %}
+{% load static %}
+{% block content %}
+
+
+            <!-- Sale & Revenue Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-bar fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                
+                                <h6 class="mb-0"><a href="{% url 'add_donor' %}" style="color: azure;">Add Profile</a></h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-keyboard fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                
+                                <h6 class="mb-0"><a href="{% url 'donate' request.user.id %}" style="color: azure;">Donate Blood</a></h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-th fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                
+                                <h6 class="mb-0"><a href="{% url 'view_donate' request.user.id %}" style="color: azure;">Donation History</a></h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-laptop fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <h6 class="mb-0"><a href="{% url 'patient_request' %}" style="color: azure;">Approve Request</a></h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Sale & Revenue End -->
+
+
+            
+
+
+            <!-- Recent Sales Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0"> Donor Details</h6>
+                        <!-- <a href="">Show All</a> -->
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table text-start align-middle table-bordered table-hover mb-0">
+                            <thead>
+                                
+                                <tr class="text-white">
+                                    <!-- <th scope="col"><input class="form-check-input" type="checkbox"></th> -->
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Blood Group</th>
+                                    <th scope="col">Unit (ml)</th>
+                                    <th scope="col">Disease (If Any)</th>
+                                    <th scope="col">Age</th>
+                                    <th scope="col">Gender</th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                </tr>
+                                
+                            </thead>
+                            <tbody>
+                                
+                                <tr>
+
+                                    <td>
+                                        {{user.name}}
+                                    </td>
+                                    <td>{{user.blood_grou}}</td>
+                                    <td>{{user.unit}}</td>
+                                    <td>{{user.disease}}</td>
+                                    <td>{{user.age}}</td>
+                                    <td>{{user.gender}}</td>
+                                    <td><a class="btn btn-sm btn-success" href="{% url 'update_donate' user.id %}">Update</a></td>
+                                    <td><a class="btn btn-sm btn-danger" href="{% url 'delete_donate' user.id %}">Delete</a></td>
+                                </tr>
+                                
+                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Recent Sales End -->
+                        <!-- Recent Sales Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Patient Request</h6>
+                        <!-- <a href="">Show All</a> -->
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table text-start align-middle table-bordered table-hover mb-0">
+                            <thead>
+                                
+                                <tr class="text-white">
+                                    
+                                    <th scope="col">Patient Name</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Reason</th>
+                                    <th scope="col">Blood Type</th>
+                                    <th scope="col">Unit (ml)</th>
+                                    <th scope="col">Doctor</th>
+                                    <th scope="col">action</th>
+                                    <!-- Add other fields as needed -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for request in view %}
+                                    <tr>
+                                    
+                                    <td>{{ request.patient_name }}</td>
+                                    <td>{% if request.status %}Approved{% else %}Pending{% endif %}</td>
+                                    <td>{{ request.reason }}</td>
+                                    <td>{{ request.blood_type }}</td>
+                                    <td>{{ request.unit }}</td>
+                                    <td>{{ request.doctor }}</td>
+                                    <td>
+                                        {% if not request.status %}
+                                            <form action="{% url 'approve_request' request.id %}" method="post">
+                                                {% csrf_token %}
+                                                <button type="submit" style="background-color: red;border-radius: 20px;">Approve</button>
+                                            </form>
+                                        {% else %}
+                                            <span>Already Approved</span>
+                                        {% endif %}
+                                    </td>
+                                    <!-- Add other fields as needed -->
+                                    </tr>
+                                {% endfor %}
+                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Recent Sales End -->
+
+
+    
+
+
+{% endblock %} 

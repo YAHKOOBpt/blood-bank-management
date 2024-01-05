@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>donor</h1>
+    <h1><a href="{% url 'donor_register' %}">Register</a></h1>
+    <h1><a href="{% url 'donor_login' %}">Login</a></h1>
+    <hr>
+    <h1>Patient</h1>
+    <h1><a href="{% url 'patient_register' %}">Register</a></h1>
+    <h1><a href="{% url 'patient_login' %}">Login</a></h1>
+
+    <h1>Admin</h1>
+    
+    <h1><a href="{% url 'admin:index' %}">Login</a></h1>
+    <h3>admin---username:blood --password:blood</h3>
+</body>
+</html>

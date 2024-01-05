@@ -1,0 +1,59 @@
+{% extends 'donor/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Recent Sales Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0">Patient Request</h6>
+            <!-- <a href="">Show All</a> -->
+        </div>
+        <div class="table-responsive">
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    
+                    <tr class="text-white">
+                        
+                        <th scope="col">Patient Name</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Reason</th>
+                        <th scope="col">Blood Type</th>
+                        <th scope="col">Unit (ml)</th>
+                        <th scope="col">Doctor</th>
+                        <th scope="col">action</th>
+                        <!-- Add other fields as needed -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for request in view %}
+                        <tr>
+                        
+                        <td>{{ request.patient_name }}</td>
+                        <td>{% if request.status %}Approved{% else %}Pending{% endif %}</td>
+                        <td>{{ request.reason }}</td>
+                        <td>{{ request.blood_type }}</td>
+                        <td>{{ request.unit }}</td>
+                        <td>{{ request.doctor }}</td>
+                        <td>
+                            {% if not request.status %}
+                                <form action="{% url 'approve_request' request.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" style="background-color: red;border-radius: 20px;">Approve</button>
+                                </form>
+                            {% else %}
+                                <span>Already Approved</span>
+                            {% endif %}
+                        </td>
+                        <!-- Add other fields as needed -->
+                        </tr>
+                    {% endfor %}
+     
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Recent Sales End -->
+
+{% endblock %} 

@@ -1,0 +1,72 @@
+ 
+{% extends 'patient/base.html' %}
+{% load static %}
+{% block content %}
+
+ <!-- Form Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    
+                    <div class="col-sm-12 col-xl">
+                        <div class="bg-secondary rounded h-100 p-4">
+                            <h6 class="mb-4"> Make Blood Request</h6>
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                
+                                <div class="row mb-3">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">Patient Name</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputEmail3" name="name" value="{{request.user.name}}">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="inputPassword3" class="col-sm-2 col-form-label">Patient Age</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" class="form-control" id="inputPassword3" name="age" value="{{request.user.age}}">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="inputPassword3" class="col-sm-2 col-form-label">Reason</label>
+                                    <div class="col-sm-10">
+                                        <input type="TEXT" class="form-control" id="inputPassword3" name="reason">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="inputPassword3" class="col-sm-2 col-form-label">Doctor Name</label>
+                                    <div class="col-sm-10">
+                                        <input type="TEXT" class="form-control" id="inputPassword3" name="doctor">
+                                    </div>
+                                </div>
+                                
+                                <div class="row mb-3">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">Needed Blood </label>
+                                    <div class="col-sm-10">
+                                        <select class="form-select mb-3" aria-label="Default select example" name="blood">
+                                            <option selected>Open this select menu</option>
+                                            <option value="A+">A+</option>
+                                            <option value="A-">A-</option>
+                                            <option value="B+">B+</option>
+                                            <option value="B-">B-</option>
+                                            <option value="AB+">AB+</option>
+                                            <option value="AB-">AB-</option>
+                                            <option value="O+">O+</option>
+                                            <option value="O-">O-</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="inputPassword3" class="col-sm-2 col-form-label" >Unit (ml)</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" class="form-control" id="inputPassword3" name="unit">
+                                    </div>
+                                </div>
+                                                     
+                                <button type="submit" class="btn btn-primary">Send Request</button>
+                            </form>
+                        </div>
+                    </div>
+                                        
+                </div>
+            </div>
+            <!-- Form End -->
+{% endblock %}
