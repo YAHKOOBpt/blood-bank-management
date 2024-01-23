@@ -100,7 +100,7 @@ def add_donor(request):
 
         # Save the user object with the updated details
         current_user.save()
-        return redirect('view_donor')  # Redirect to the donor's dashboard or a success page
+        return redirect('view_donor',pk=current_user.pk)  # Redirect to the donor's dashboard or a success page
     
 
     return render(request,'donor/add_donor.html')
@@ -336,7 +336,7 @@ def add_patient(request):
 
         # Save the user object with the updated details
         current_user.save()
-        return redirect('view_patient')  # Redirect to the donor's dashboard or a success page
+        return redirect('view_patient',pk=current_user.pk)  # Redirect to the donor's dashboard or a success page
     
 
     return render(request,'patient/add_patient.html')

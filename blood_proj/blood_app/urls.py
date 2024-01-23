@@ -1,5 +1,6 @@
 from django.urls import path
-from . import views
+from . import views 
+from .views import view_donor,view_patient
 urlpatterns = [
 
     path('', views.home, name='home'),
