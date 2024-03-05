@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 import os
 from django.shortcuts import render, get_object_or_404
+from django.core.mail import send_mail
+from django.conf import settings
 # Create your views here.
 
 def home(request):
@@ -43,7 +45,11 @@ def donor_register(request):
                     is_donor=True,
                 )
                 user.save()
-                # Add a success message
+                 # Sending registration confirmation email
+                subject = 'Welcome to our Blood Bank site!'
+                message = 'Dear {},\nThank you for registering as a donor.'.format(uname)
+                recipient = email
+                send_mail(subject, message, settings.EMAIL_HOST_USER, [recipient], fail_silently=False)
                 messages.success(request, 'Registration successful. You can now log in.')
                 return redirect('donor_login')
         else:
@@ -177,16 +183,14 @@ def view_donate(request,pk):
 def update_donate(request,pk):
     
     update = get_object_or_404(User, pk=pk)    
-    if request.method == 'POST':
-        
+    if request.method == 'POST':        
         update.blood_grou=request.POST.get('blood')
         update.unit=request.POST.get('unit')
         update.disease=request.POST.get('disease')
         update.age=request.POST.get('age')
         update.save()  
         return redirect('view_donate', pk=pk) 
-        
-        
+               
     context={
         'update':update
     }
@@ -277,6 +281,12 @@ def patient_register(request):
                     is_patient=True,
                 )
                 user.save()
+
+                 # Sending registration confirmation email
+                subject = 'Welcome to our Blood Bank site!'
+                message = 'Dear {},\nThank you for registering as a Patient.'.format(uname)
+                recipient = email
+                send_mail(subject, message, settings.EMAIL_HOST_USER, [recipient], fail_silently=False)
                 # Add a success message
                 messages.success(request, 'Registration successful. You can now log in.')
                 return redirect('patient_login')
@@ -396,11 +406,8 @@ def make_request(request,pk):
         blood_type = request.POST.get('blood')
         unit = request.POST.get('unit')
         doctor = request.POST.get('doctor')
-
         donor = User.objects.get(id=pk)
-        
-        
-
+        email=donor.email
         # Create a new BloodRequest object
         BloodRequest.objects.create(
             
@@ -413,6 +420,12 @@ def make_request(request,pk):
             unit=unit,
             doctor=doctor
         )
+
+        # Send email to the donor
+        subject = 'Blood Request from a Patient'
+        message = f'Dear {donor.username},\n\nA patient named {patient_name}, aged {patient_age}, with blood group {blood_type}, has requested blood donation. Please consider helping.\n\nThank you.'
+        send_mail(subject, message, settings.EMAIL_HOST_USER, [email], fail_silently=False)
+
 
         messages.success(request, 'Blood request sent successfully!')
         return redirect('view_blood')

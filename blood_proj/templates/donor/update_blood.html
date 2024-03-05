@@ -27,10 +27,26 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="row mb-3">
+                                <!-- <div class="row mb-3">
                                     <label for="inputPassword3" class="col-sm-2 col-form-label">Unit (ml)</label>
                                     <div class="col-sm-10">
                                         <input type="number" class="form-control" id="inputPassword3" name="unit" value="{{update.unit}}">
+                                    </div>
+                                </div> -->
+                                <div class="row mb-3">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">Unit (ml)</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-select mb-3" aria-label="Default select example" name="unit">
+                                            <option value="100"{% if update.unit == 100 %} selected{% endif %}>100</option>
+                                            <option value="150"{% if update.unit == 150 %} selected{% endif %}>150</option>
+                                            <option value="200"{% if update.unit == 200 %} selected{% endif %}>200</option>
+                                            <option value="250"{% if update.unit == 250 %} selected{% endif %}>250</option>
+                                            <option value="300"{% if update.unit == 300 %} selected{% endif %}>300</option>
+                                            <option value="350"{% if update.unit == 350 %} selected{% endif %}>350</option>
+                                            <option value="400"{% if update.unit == 400 %} selected{% endif %}>400</option>
+                                            <option value="450"{% if update.unit == 450 %} selected{% endif %}>450</option>
+                                            <option value="470"{% if update.unit == 470 %} selected{% endif %}>470</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
