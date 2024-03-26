@@ -46,6 +46,8 @@ class BloodRequest(models.Model):
     patient_id = models.IntegerField(null=True, blank=True)
     reasen = models.CharField(max_length=100, null=True, blank=True)
     patient_name = models.CharField(max_length=100, null=True, blank=True)
+    patient_place = models.CharField(max_length=100, null=True, blank=True)
+    patient_district = models.CharField(max_length=100, null=True, blank=True)
     patient_age = models.PositiveIntegerField(null=True, blank=True)
     reason = models.CharField(max_length=100, null=True, blank=True)
     blood_type = models.CharField(max_length=3, choices=BLOOD_GROUPS, null=True, blank=True)

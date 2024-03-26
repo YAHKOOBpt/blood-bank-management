@@ -47,46 +47,48 @@
                         <!-- <a href="">Show All</a> -->
                     </div>
                     <div class="table-responsive">
-                        <table class="table text-start align-middle table-bordered table-hover mb-0">
-                            <thead>
-                                
-                                <tr class="text-white">
-                                    <!-- <th scope="col"><input class="form-check-input" type="checkbox"></th> -->
-                                    <th scope="col">Donor Name</th>
-                                    <th scope="col">Mobile</th>
-                                    <th scope="col">Address</th>
-                                    <th scope="col">Disease</th>
-                                    <th scope="col">Blood Group</th>
-                                    <th scope="col">Unit (ml)</th>              
-                                    <th scope="col">Gender</th>
-                                    <th scope="col">Age</th>
-                                    <th scope="col">Photo</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                                
-                            </thead>
-                            <tbody>
-                                {% for i in donors %}
-                                <tr>
+                         <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    
+                    <tr class="text-white">
+                        <!-- <th scope="col"><input class="form-check-input" type="checkbox"></th> -->
+                        <th scope="col">Donor Name</th>
+                        <th scope="col">Mobile</th>
+                        <th scope="col">District</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Disease</th>
+                        <th scope="col">Blood Group</th>
+                        <th scope="col">Unit (ml)</th>              
+                        <th scope="col">Gender</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Photo</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    
+                </thead>
+                <tbody>
+                    {% for i in donors %}
+                    <tr>
 
-                                    <td>
-                                        {{i.name}}
-                                    </td>
-                                    <td>{{i.mobile}}</td>
-                                    <td>{{i.address}}</td>
-                                    <td>{{i.disease}}</td>
-                                    <td>{{i.blood_grou}}</td>
-                                    <td>{{i.unit}}</td>
-                                
-                                    <td>{{i.gender}}</td>
-                                    <td>{{i.age}}</td>
-                                    <td><img src="{{i.imageURL}}" alt="" width="80px" height="70px"></td>
-                                    <td><a class="btn btn-sm btn-primary" href="{% url 'make_request' i.pk %}">Send Request</a></td>
-                                </tr>
-                                {% endfor %}
-                
-                            </tbody>
-                        </table>
+                        <td>
+                            {{i.name}}
+                        </td>
+                        <td>{{i.mobile}}</td>
+                        <td>{{i.district}}</td>
+                        <td>{{i.address}}</td>
+                        <td>{{i.disease}}</td>
+                        <td>{{i.blood_grou}}</td>
+                        <td>{{i.unit}}</td>
+                      
+                        <td>{{i.gender}}</td>
+                        <td>{{i.age}}</td>
+                        <td><img src="{{i.imageURL}}" alt="" width="80px" height="70px"></td>
+                        <td><a class="btn btn-sm btn-primary" href="{% url 'make_request' i.pk %}">Send Request</a></td>
+                    </tr>
+                    {% endfor %}
+     
+                </tbody>
+            </table>
                     </div>
                 </div>
             </div>

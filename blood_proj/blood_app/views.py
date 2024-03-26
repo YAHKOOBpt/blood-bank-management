@@ -222,6 +222,7 @@ def patient_request(request):
 ###########approved blood request ################
 
 def approve_request(request, request_id):
+    donor=request.user
     # Get the BloodRequest object
     blood_request = get_object_or_404(BloodRequest, id=request_id)
 
@@ -230,6 +231,16 @@ def approve_request(request, request_id):
         # Update the status to approved
         blood_request.status = True
         blood_request.save()
+        blood_ml=blood_request.unit
+        
+        # Decrease the donor's available blood units
+        blood_ml = blood_request.unit
+        donor.unit -= blood_ml
+        donor.save()
+        # If blood units become empty, empty the blood group field
+        if donor.unit <= 0:
+            donor.blood_grou = ''
+            donor.save()
 
     return redirect('patient_request') 
 
@@ -249,7 +260,7 @@ def SignOut(request):
 def patient_home(request):
     
      # Query all donors
-    donors = User.objects.filter(is_donor=True)
+    donors = User.objects.filter(is_donor=True,name__isnull=False, name__gt='',blood_grou__isnull=False,blood_grou__gt='')
     
     context={
         
@@ -389,7 +400,7 @@ def update_patient(request,pk):
 
 def view_blood(request):
     # Query all donors
-    donors = User.objects.filter(is_donor=True)
+    donors = User.objects.filter(is_donor=True,name__isnull=False, name__gt='',blood_grou__isnull=False,blood_grou__gt='')
     context ={
         'donors':donors
     }
@@ -407,6 +418,8 @@ def make_request(request,pk):
         unit = request.POST.get('unit')
         doctor = request.POST.get('doctor')
         donor = User.objects.get(id=pk)
+        district = request.POST.get('district')
+        place = request.POST.get('place')
         email=donor.email
         # Create a new BloodRequest object
         BloodRequest.objects.create(
@@ -418,12 +431,14 @@ def make_request(request,pk):
             reasen=reason,
             blood_type=blood_type,
             unit=unit,
-            doctor=doctor
+            doctor=doctor,
+            patient_district=district,
+            patient_place=place,
         )
 
         # Send email to the donor
         subject = 'Blood Request from a Patient'
-        message = f'Dear {donor.username},\n\nA patient named {patient_name}, aged {patient_age}, with blood group {blood_type}, has requested blood donation. Please consider helping.\n\nThank you.'
+        message = f'Dear {donor.username},\n\nA patient named : {patient_name}, age : {patient_age}, with blood group : {blood_type}, has requested blood donation. Please consider helping.\n\nThank you.'
         send_mail(subject, message, settings.EMAIL_HOST_USER, [email], fail_silently=False)
 
 

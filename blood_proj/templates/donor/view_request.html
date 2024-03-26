@@ -16,6 +16,9 @@
                     <tr class="text-white">
                         
                         <th scope="col">Patient Name</th>
+                        <th scope="col">District</th>
+                        <th scope="col">Place</th>
+                        <th scope="col">Age</th>
                         <th scope="col">Status</th>
                         <th scope="col">Reason</th>
                         <th scope="col">Blood Type</th>
@@ -30,6 +33,9 @@
                         <tr>
                         
                         <td>{{ request.patient_name }}</td>
+                        <td>{{ request.patient_district }}</td>
+                        <td>{{ request.patient_place }}</td>
+                        <td>{{ request.patient_age }}</td>
                         <td>{% if request.status %}Approved{% else %}Pending{% endif %}</td>
                         <td>{{ request.reasen }}</td>
                         <td>{{ request.blood_type }}</td>
