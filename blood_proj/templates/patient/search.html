@@ -1,0 +1,85 @@
+{% extends 'patient/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Search Bar Start -->
+<div class="container-fluid pt-4 px-4">
+     <form class="mb-4" action="" method="GET">
+        <div class="input-group">
+            <select class="form-select" name="blood_group">
+                <option value="">Search Blood Group</option>
+                <option value="A+">A+</option>
+                <option value="A">A</option>
+                <option value="B+">B+</option>
+                <option value="B">B</option>
+                <option value="C+">C+</option>
+                <option value="C">C</option>
+                <option value="D+">D+</option>
+                <!-- Add more blood groups as needed -->
+            </select>
+            <button class="btn btn-outline-danger" type="submit">Search</button>
+        </div>
+    </form>
+</div>
+<!-- Search Bar End -->
+
+<!-- Recent Sales Start -->
+<div class="container-fluid pt-4 px-4">
+    {% if blood %}
+        <div class="bg-secondary text-center rounded p-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h6 class="mb-0"> Blood Details</h6>
+                <!-- <a href="">Show All</a> -->
+            </div>
+            <div class="table-responsive">
+                <table class="table text-start align-middle table-bordered table-hover mb-0">
+                    <thead>
+                        
+                        <tr class="text-white">
+                            <!-- <th scope="col"><input class="form-check-input" type="checkbox"></th> -->
+                            <th scope="col">Donor Name</th>
+                            <th scope="col">Mobile</th>
+                            <th scope="col">District</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Disease</th>
+                            <th scope="col">Blood Group</th>
+                            <th scope="col">Unit (ml)</th>              
+                            <th scope="col">Gender</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Photo</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        
+                    </thead>
+                    <tbody>
+                        {% for i in blood %}
+                        <tr>
+
+                            <td>
+                                {{i.name}}
+                            </td>
+                            <td>{{i.mobile}}</td>
+                            <td>{{i.district}}</td>
+                            <td>{{i.address}}</td>
+                            <td>{{i.disease}}</td>
+                            <td>{{i.blood_grou}}</td>
+                            <td>{{i.unit}}</td>
+                        
+                            <td>{{i.gender}}</td>
+                            <td>{{i.age}}</td>
+                            <td><img src="{{i.imageURL}}" alt="" width="80px" height="70px"></td>
+                            <td><a class="btn btn-sm btn-primary" href="{% url 'make_request' i.pk %}">Send Request</a></td>
+                        </tr>
+                        {% endfor %}
+        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% else %}
+        <h3>No Blood Group </h3>
+    {% endif %}
+</div>
+<!-- Recent Sales End -->
+
+{% endblock %} 

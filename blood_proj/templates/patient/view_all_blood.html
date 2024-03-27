@@ -2,6 +2,27 @@
 {% load static %}
 {% block content %}
 
+<!-- Search Bar Start -->
+<div class="container-fluid pt-4 px-4">
+     <form class="mb-4" action="{% url 'search' %}" method="GET">
+        <div class="input-group">
+            <select class="form-select" name="blood_group">
+                <option value="">Search Blood Group</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+                <!-- Add more blood groups as needed -->
+            </select>
+            <button class="btn btn-outline-danger" type="submit">Search</button>
+        </div>
+    </form>
+</div>
+<!-- Search Bar End -->
 <!-- Recent Sales Start -->
 <div class="container-fluid pt-4 px-4">
     <div class="bg-secondary text-center rounded p-4">

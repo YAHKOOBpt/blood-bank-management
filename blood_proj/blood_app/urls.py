@@ -39,6 +39,8 @@ urlpatterns = [
     path('request_history', views.request_history, name='request_history'),
     path('patient_SignOut', views.patient_SignOut, name='patient_SignOut'),
 
+    path('search', views.search, name='search'),
+
     
 
 

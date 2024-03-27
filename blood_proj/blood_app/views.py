@@ -6,6 +6,7 @@ import os
 from django.shortcuts import render, get_object_or_404
 from django.core.mail import send_mail
 from django.conf import settings
+from django.db.models import Q
 # Create your views here.
 
 def home(request):
@@ -464,3 +465,15 @@ def patient_SignOut(request):
      logout(request)
      return redirect('home')
 
+###############search #######################
+def search(request):
+    query=request.GET.get('blood_group', '')
+    # Filter by name, package_location, and price (if valid)
+    blood = User.objects.filter(
+        Q(blood_grou__icontains=query) ,
+        name__isnull=False, name__gt='',blood_grou__isnull=False,blood_grou__gt=''
+    )
+    context={
+        'blood':blood,
+    }
+    return render(request,'patient/search.html',context)
